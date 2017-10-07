@@ -11,28 +11,15 @@ using System;
 namespace aspnetvue.Migrations
 {
     [DbContext(typeof(AspnetVueDbContext))]
-    partial class AspnetVueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171007214131_Features")]
+    partial class Features
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("aspnet_vue.Models.Feature", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Features");
-                });
 
             modelBuilder.Entity("aspnet_vue.Models.Make", b =>
                 {

@@ -11,9 +11,10 @@ using System;
 namespace aspnetvue.Migrations
 {
     [DbContext(typeof(AspnetVueDbContext))]
-    partial class AspnetVueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171007214754_FeaturesTable")]
+    partial class FeaturesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
