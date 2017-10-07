@@ -28,6 +28,11 @@
                             <span class="glyphicon glyphicon-th-list"></span> Fetch data
                         </router-link>
                     </li>
+                    <li>
+                        <router-link to="/vehicle/new">
+                            <span class="glyphicon glyphicon-plus"></span> New vehicle
+                        </router-link>
+                    </li>
                 </ul>
             </div>
         </div>
