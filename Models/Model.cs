@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace aspnet_vue.Models
 {
-    [Table("Modes")]
+    [Table("Models")]
     public class Model
     {
         public int Id { get; set; }

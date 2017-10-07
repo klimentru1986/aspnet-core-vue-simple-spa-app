@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
 
 namespace aspnet_vue
 {
@@ -24,6 +25,8 @@ namespace aspnet_vue
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper();
+
             services.AddDbContext<AspnetVueDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
 
