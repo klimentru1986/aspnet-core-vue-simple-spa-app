@@ -3,6 +3,7 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "module": "es2015",
+    "lib": ["es5", "es6", "es2015", "dom"],
     "moduleResolution": "node",
     "target": "es5",
     "sourceMap": true,
@@ -10,8 +11,5 @@
     "strict": true,
     "types": ["webpack-env"]
   },
-  "exclude": [
-      "bin",
-      "node_modules"
-  ]
+  "exclude": ["bin", "node_modules"]
 }
