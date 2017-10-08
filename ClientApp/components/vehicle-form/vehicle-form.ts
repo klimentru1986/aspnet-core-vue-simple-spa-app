@@ -1,9 +1,12 @@
+import { VehicleInteropService } from './../../services/make/vehicle-interop-service';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import { MakeService } from '../../services/make/make-service';
 import { MakeModel } from '../../models/make.model';
 import { VehicleModelModel } from '../../models/vehicle-model.model';
 
+/**
+ * Vehicle form page component
+ */
 @Component
 export default class VehicleFormComponent extends Vue {
   public make: number;
@@ -16,19 +19,36 @@ export default class VehicleFormComponent extends Vue {
     this.makes = [];
     this.models = [];
     this.getMakes();
+    this.getFeatures();
   }
 
-  getMakes(): void {
-    MakeService.getMakes().then(makes => (this.makes = makes));
+  /**
+   * get makes from server
+   */
+  public getMakes(): void {
+    VehicleInteropService.getMakes().then(makes => (this.makes = makes));
   }
 
+  /**
+   * get features from server
+   */
+  public getFeatures(): void {
+    VehicleInteropService.getFeatures().then(features => console.log(features));
+  }
+
+  /**
+   * set models on makes change
+   */
   public onMakeChange(): void {
     let selectedMake: MakeModel | undefined = this.makes.find(
       i => i.id === this.make
     );
 
-    if(selectedMake){
-      this.models = selectedMake.models;
+    if (!selectedMake) {
+      this.models = [];
+      return;
     }
+
+    this.models = selectedMake.models;
   }
 }
