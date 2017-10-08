@@ -1,8 +1,9 @@
-import { VehicleInteropService } from './../../services/make/vehicle-interop-service';
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import { MakeModel } from '../../models/make.model';
 import { VehicleModelModel } from '../../models/vehicle-model.model';
+import { VehicleInteropService } from './../../services/vehicle-interop/vehicle-interop-service';
+import { FeatureModel } from '../../models/feature.model';
 
 /**
  * Vehicle form page component
@@ -12,12 +13,14 @@ export default class VehicleFormComponent extends Vue {
   public make: number;
   public makes: Array<MakeModel>;
   public models: Array<VehicleModelModel>;
+  public features: Array<FeatureModel>;
 
   constructor() {
     super();
     this.make = 0;
     this.makes = [];
     this.models = [];
+    this.features = [];
     this.getMakes();
     this.getFeatures();
   }
@@ -33,7 +36,9 @@ export default class VehicleFormComponent extends Vue {
    * get features from server
    */
   public getFeatures(): void {
-    VehicleInteropService.getFeatures().then(features => console.log(features));
+    VehicleInteropService.getFeatures().then(
+      features => (this.features = features)
+    );
   }
 
   /**

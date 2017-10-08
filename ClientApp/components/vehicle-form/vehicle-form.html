@@ -21,5 +21,14 @@
             <option v-for="model in models" :value="model">{{model.name}}</option>
       </select>
     </div>
+
+    <h2>Features</h2>
+
+    <div class="checkbox" v-for="feature in features">
+      <label :for="`feature_${feature.id}`">
+        <input type="checkbox" :id="`feature_${feature.id}`"> {{feature.name}}
+      </label>
+    </div>
+
   </form>
 </div>
