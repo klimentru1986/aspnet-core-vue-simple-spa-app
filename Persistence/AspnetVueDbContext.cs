@@ -8,6 +8,7 @@ namespace aspnet_vue.Persistence
 
         public DbSet<Make> Makes { get; set; }
         public DbSet<Feature> Features { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
 
         public DbSet<VehicleFeature> VehicleFeature { get; set; }
         public AspnetVueDbContext(DbContextOptions<AspnetVueDbContext> options) : base(options)
