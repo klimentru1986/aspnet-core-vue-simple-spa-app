@@ -23,23 +23,23 @@ namespace aspnet_vue.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource)
+        public async Task<ActionResult> CreateVehicle([FromBody] SaveVehicleResource vehicleResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var vehicle = mapper.Map<VehicleResource, Vehicle>(vehicleResource);
+            var vehicle = mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource);
 
             context.Vehicles.Add(vehicle);
             await context.SaveChangesAsync();
 
-            var result = mapper.Map<Vehicle, VehicleResource>(vehicle);
+            var result = mapper.Map<Vehicle, SaveVehicleResource>(vehicle);
 
             return Ok(result);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateVehicle(int id, [FromBody] VehicleResource vehicleResource)
+        public async Task<ActionResult> UpdateVehicle(int id, [FromBody] SaveVehicleResource vehicleResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -51,17 +51,17 @@ namespace aspnet_vue.Controllers
                 return NotFound();
             }
 
-            mapper.Map<VehicleResource, Vehicle>(vehicleResource, vehicle);
+            mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource, vehicle);
 
             await context.SaveChangesAsync();
 
-            var result = mapper.Map<Vehicle, VehicleResource>(vehicle);
+            var result = mapper.Map<Vehicle, SaveVehicleResource>(vehicle);
 
             return Ok(result);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteVehicle(int id)
         {
 
             var vehicle = await context.Vehicles.FindAsync(id);
@@ -77,5 +77,25 @@ namespace aspnet_vue.Controllers
             return Ok(id);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetVehicle(int id)
+        {
+
+            var vehicle = await context.Vehicles
+                .Include(i => i.Features)
+                .ThenInclude(vf => vf.Feature)
+                .Include(i => i.Model)
+                .ThenInclude(m => m.Make)
+                .SingleOrDefaultAsync(i => i.Id == id);
+
+            if (vehicle == null)
+            {
+                return NotFound();
+            }
+
+            var vehicleResource = mapper.Map<Vehicle, VehicleResource>(vehicle);
+
+            return Ok(vehicleResource);
+        }
     }
 }

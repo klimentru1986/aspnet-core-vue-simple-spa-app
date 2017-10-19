@@ -21,11 +21,11 @@ namespace aspnet_vue.Controllers
         }
 
         [HttpGet("api/features")]
-        public async Task<IEnumerable<FeatureResource>> getFeatures()
+        public async Task<IEnumerable<KeyValuePairResource>> getFeatures()
         {
             var features = await this.context.Features.ToListAsync();
 
-            return this.maper.Map<List<Feature>, List<FeatureResource>>(features);
+            return this.maper.Map<List<Feature>, List<KeyValuePairResource>>(features);
         }
     }
 }
